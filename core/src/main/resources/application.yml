@@ -1,0 +1,6 @@
+spring:
+  output:
+    ansi:
+      enabled: detect
+  banner:
+    location: classpath:/banner.txt

@@ -1,0 +1,21 @@
+server:
+  port: 4000
+spring:
+  output:
+    ansi:
+      enabled: detect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gchat
+    username: postgres
+    password: mkae12000
+  jpa:
+    database: postgresql
+    show-sql: on
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+      jadira:
+        usertype:
+          autoRegisterUserTypes: true
