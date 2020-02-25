@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserAccountMapperTest {
-    private UserAccountMapper userAccountMapper = Mappers.getMapper(UserAccountMapper.class);
+    private final UserAccountMapper userAccountMapper = Mappers.getMapper(UserAccountMapper.class);
 
     @Test
     public void account_To_Entity() {

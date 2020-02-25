@@ -48,9 +48,7 @@ public class UserControllerTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(cookie().exists("Authorization"))
-                .andDo(mvcResult -> {
-                    authCookie = mvcResult.getResponse().getCookie("Authorization");
-                });
+                .andDo(mvcResult -> authCookie = mvcResult.getResponse().getCookie("Authorization"));
 
         assertThat(authCookie).isNotNull();
     }

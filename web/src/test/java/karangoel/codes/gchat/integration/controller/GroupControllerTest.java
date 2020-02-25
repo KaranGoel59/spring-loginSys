@@ -47,9 +47,7 @@ public class GroupControllerTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(cookie().exists("Authorization"))
-                .andDo(mvcResult -> {
-                    authCookie = mvcResult.getResponse().getCookie("Authorization");
-                });
+                .andDo(mvcResult -> authCookie = mvcResult.getResponse().getCookie("Authorization"));
 
         assertThat(authCookie).isNotNull();
     }
@@ -82,9 +80,7 @@ public class GroupControllerTest {
                         .cookie(authCookie)
         )
                 .andExpect(status().isOk())
-                .andDo(mvcResult -> {
-                    log.info(mvcResult.getResponse().getContentAsString());
-                });
+                .andDo(mvcResult -> log.info(mvcResult.getResponse().getContentAsString()));
     }
 
 

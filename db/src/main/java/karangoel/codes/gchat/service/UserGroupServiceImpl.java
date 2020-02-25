@@ -17,10 +17,10 @@ import java.util.Set;
 public class UserGroupServiceImpl implements UserGroupService {
 
     // == fields ==
-    private UserGroupMapper userGroupMapper = Mappers.getMapper(UserGroupMapper.class);
+    private final UserGroupMapper userGroupMapper = Mappers.getMapper(UserGroupMapper.class);
 
-    private UserGroupRepository userGroupRepository;
-    private UserAccountRepository userAccountRepository;
+    private final UserGroupRepository userGroupRepository;
+    private final UserAccountRepository userAccountRepository;
 
     // == constructors ==
     @Autowired

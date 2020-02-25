@@ -3,7 +3,7 @@ package karangoel.codes.gchat.util;
 import java.util.regex.Pattern;
 
 final public class EmailRegexValidator {
-    public static boolean check(String email) {
+    public static boolean isValid(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."  +
                 "[a-zA-Z0-9_+&*-]+)*@"     +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z"  +
@@ -13,5 +13,9 @@ final public class EmailRegexValidator {
         if (email == null)
             return false;
         return pat.matcher(email).matches();
+    }
+
+    public static boolean isNotValid(String email) {
+        return !isValid(email);
     }
 }

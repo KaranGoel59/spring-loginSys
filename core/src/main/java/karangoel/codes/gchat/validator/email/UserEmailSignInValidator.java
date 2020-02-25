@@ -26,7 +26,7 @@ public class UserEmailSignInValidator implements ConstraintValidator<UserEmailSi
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        if(Objects.isNull(email) || !EmailRegexValidator.check(email)) {
+        if(Objects.isNull(email) || EmailRegexValidator.isNotValid(email)) {
             return false;
         }
 

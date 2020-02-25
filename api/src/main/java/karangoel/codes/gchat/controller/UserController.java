@@ -22,7 +22,7 @@ import static karangoel.codes.gchat.util.Mappings.VERSION;
 public class UserController {
 
     // == fields ==
-    private UserAccountService userAccountService;
+    private final UserAccountService userAccountService;
 
     // == constructors ==
     @Autowired

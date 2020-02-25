@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Constraint(validatedBy = UserEmailSignUpValidator.class)
 public @interface UserEmailSignUp {
-    String message() default "{user.email.invalid}";;
+    String message() default "{user.email.invalid}";
 
     Class<?>[] groups() default { };
 

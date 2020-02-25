@@ -14,7 +14,7 @@ import java.util.Collections;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     // == fields ==
-    private UserAccountService userAccountService;
+    private final UserAccountService userAccountService;
 
     // == constructors ==
     @Autowired

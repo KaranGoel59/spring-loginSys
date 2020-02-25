@@ -15,10 +15,10 @@ import java.util.Optional;
 public class UserAccountServiceImpl implements UserAccountService {
 
     // == fields ==
-    private UserAccountMapper userAccountMapper = Mappers.getMapper(UserAccountMapper.class);
+    private final UserAccountMapper userAccountMapper = Mappers.getMapper(UserAccountMapper.class);
 
-    private UserAccountRepository userAccountRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserAccountRepository userAccountRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     // == constructors ==
     @Autowired

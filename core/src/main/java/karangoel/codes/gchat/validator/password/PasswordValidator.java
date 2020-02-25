@@ -33,7 +33,7 @@ public class PasswordValidator implements ConstraintValidator<Password,String> {
         }
 
         boolean upperCase, lowerCase, digit,  space;
-        upperCase = lowerCase = digit = space =false;;
+        upperCase = lowerCase = digit = space =false;
         for (char s : password.toCharArray()) {
             if(Character.isUpperCase(s)) {
                 upperCase = true;
@@ -49,7 +49,7 @@ public class PasswordValidator implements ConstraintValidator<Password,String> {
             }
         }
 
-        String fails = new String("");
+        String fails = "";
 
         if(!upperCase) {
             fails += "{user.password.uppercase},";

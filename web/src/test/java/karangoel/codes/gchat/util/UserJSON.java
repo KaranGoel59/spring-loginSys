@@ -11,7 +11,7 @@ final public class UserJSON {
         data.put("email",  email);
         data.put("firstName", firstName);
         data.put("lastName", lastName);
-        data.put("password", password);;
+        data.put("password", password);
         return data;
     }
 

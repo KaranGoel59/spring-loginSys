@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class UserGroupMapperTest {
-    private UserGroupMapper userGroupMapper = Mappers.getMapper(UserGroupMapper.class);
+    private final UserGroupMapper userGroupMapper = Mappers.getMapper(UserGroupMapper.class);
 
     @Test
     public void group_To_Entity() {

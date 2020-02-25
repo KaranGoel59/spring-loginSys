@@ -27,8 +27,8 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
             .status(status.toString())
             .message(fieldError != null ? fieldError.getDefaultMessage() : "error").build();
 
-;;        return ResponseEntity.badRequest().body(responseDTO);
-    };
+        return ResponseEntity.badRequest().body(responseDTO);
+    }
 
     // == custom handler ==
 
