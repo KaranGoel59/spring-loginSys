@@ -28,6 +28,7 @@
         <swagger2.version>2.9.2</swagger2.version>
         <java-jwt.version>3.10.0</java-jwt.version>
         <jackson-annotation.version>2.10.2</jackson-annotation.version>
+        <surefire.version>3.0.0-M4</surefire.version>
     </properties>
 
     <dependencyManagement>
@@ -77,5 +78,17 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
