@@ -1,10 +1,8 @@
 package karangoel.codes.gchat.integration.controller;
 
 import karangoel.codes.gchat.Main;
-import karangoel.codes.gchat.utils.JSON.GroupJSON;
-import karangoel.codes.gchat.utils.JSON.UserJSON;
+import karangoel.codes.gchat.util.UserJSON;
 import lombok.extern.slf4j.Slf4j;
-import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,20 +18,23 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import javax.servlet.http.Cookie;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(
         classes = Main.class,
-        webEnvironment = SpringBootTest.WebEnvironment.MOCK
+       webEnvironment = SpringBootTest.WebEnvironment.MOCK
 )
 @AutoConfigureMockMvc
-public class GroupControllerTest {
+public class UserControllerTest {
+
     @Autowired
     private MockMvc mvc;
 
-    private Cookie authCookie;
+    // == tests ==
+    private Cookie authCookie = null;
 
     @Before
     public void signInUser() throws Exception {
@@ -54,53 +55,19 @@ public class GroupControllerTest {
         assertThat(authCookie).isNotNull();
     }
 
-    @Test
-    public void whenCreateAGroup_newGroup() throws Exception {
-        assertThat(authCookie).isNotNull();
-
-        JSONObject newGroup = GroupJSON.createGroup("group1");
-
-        mvc.perform(
-                MockMvcRequestBuilders
-                .post("/api/v1/user/group/")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(newGroup.toString())
-                .cookie(authCookie)
-        )
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.body", Matchers.is("group1 created")));
-    }
 
     @Test
-    public void joinAGroup_returnGroup() throws Exception {
+    public  void checkUserJWT() throws Exception {
         assertThat(authCookie).isNotNull();
 
         mvc.perform(
                 MockMvcRequestBuilders
-                        .get("/api/v1/user/group/join/" + 1)
-                        .contentType(MediaType.APPLICATION_JSON)
+                        .get("/api/v1/user/")
                         .cookie(authCookie)
         )
                 .andExpect(status().isOk())
-                .andDo(mvcResult -> {
-                    log.info(mvcResult.getResponse().getContentAsString());
-                });
-    }
-
-
-    @Test
-    public void getGroups_Groups() throws Exception {
-        assertThat(authCookie).isNotNull();
-
-        mvc.perform(
-                MockMvcRequestBuilders
-                .get("/api/v1/user/group/")
-                .contentType(MediaType.APPLICATION_JSON)
-                .cookie(authCookie)
-        )
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.body.[*].name").isArray())
-                .andExpect(jsonPath("$.body.[*].name", Matchers.contains("group1")));
+                .andExpect(jsonPath("$.body.email", is("usertest@test.com")))
+                .andExpect(jsonPath("$.body.password").doesNotExist());
     }
 
 }

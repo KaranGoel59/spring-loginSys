@@ -1,7 +1,7 @@
 package karangoel.codes.gchat.integration.controller;
 
 import karangoel.codes.gchat.Main;
-import karangoel.codes.gchat.utils.JSON.UserJSON;
+import karangoel.codes.gchat.util.UserJSON;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.junit.Test;

@@ -21,6 +21,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 import static karangoel.codes.gchat.util.Constants.SIGN_UP_URL;
+import static karangoel.codes.gchat.util.Constants.WEB_SOCKET_URL;
 
 @Configuration
 @EnableWebSecurity
@@ -88,7 +89,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable()
 
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                    .antMatchers(HttpMethod.POST, SIGN_UP_URL, WEB_SOCKET_URL).permitAll()
+                    .antMatchers(HttpMethod.GET, WEB_SOCKET_URL).permitAll()
 
                 .anyRequest()
                     .authenticated()

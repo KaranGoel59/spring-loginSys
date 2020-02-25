@@ -1,4 +1,4 @@
-package karangoel.codes.gchat.utils.JSON;
+package karangoel.codes.gchat.util;
 
 import java.util.regex.Pattern;
 

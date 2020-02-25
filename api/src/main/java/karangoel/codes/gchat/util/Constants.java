@@ -8,6 +8,7 @@ final public class Constants {
     public static final String HEADER_STRING = "Authorization";
 
     public static final String SIGN_UP_URL = Mappings.VERSION + Mappings.USER + Mappings.SIGN_UP;
+    public static final String WEB_SOCKET_URL =  Mappings.WEB_SOCKET  + "/**";
 
     // == constructors ==
     private Constants() {}

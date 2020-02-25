@@ -2,7 +2,7 @@ package karangoel.codes.gchat.validator.email;
 
 import karangoel.codes.gchat.model.UserAccount;
 import karangoel.codes.gchat.service.UserAccountService;
-import karangoel.codes.gchat.utils.JSON.EmailRegexValidator;
+import karangoel.codes.gchat.util.EmailRegexValidator;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package karangoel.codes.gchat.utils.JSON;
+package karangoel.codes.gchat.util;
 
 import org.json.JSONException;
 import org.json.JSONObject;

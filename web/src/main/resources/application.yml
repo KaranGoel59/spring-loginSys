@@ -10,7 +10,7 @@ spring:
     password: mkae12000
   jpa:
     database: postgresql
-    show-sql: off
+    show-sql: on
     hibernate:
       ddl-auto: update
     properties:

@@ -1,4 +1,4 @@
-package karangoel.codes.gchat.unit;
+package karangoel.codes.gchat.unit.service;
 
 import karangoel.codes.gchat.domain.UserAccountEntity;
 import karangoel.codes.gchat.domain.UserGroupEntity;
