@@ -31,7 +31,7 @@ public class UserGroupServiceTest {
     @Test
     public void whenAddMember_returnGroup() {
         UserAccountEntity userAccountEntity = UserAccountEntity.builder()
-                .id((long) 1)
+                .id(1)
                 .email("test@test.com")
                 .firstName("test")
                 .lastName("test")
@@ -39,7 +39,7 @@ public class UserGroupServiceTest {
                 .build();
 
         UserGroupEntity userGroupEntity = UserGroupEntity.builder()
-                .id((long) 1)
+                .id(1)
                 .name("testGroup")
                 .build();
 

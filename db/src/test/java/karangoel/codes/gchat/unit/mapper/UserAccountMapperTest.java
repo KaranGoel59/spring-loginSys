@@ -30,7 +30,7 @@ public class UserAccountMapperTest {
     @Test
     public void entity_To_Account() {
         UserAccountEntity userAccountEntity = UserAccountEntity.builder()
-                .id((long) 1)
+                .id(1)
                 .email("test@test.com")
                 .firstName("test")
                 .lastName("test")

@@ -28,7 +28,7 @@ public class UserGroupMapperTest {
     @Test
     public void entity_To_Group() {
         UserGroupEntity userGroupEntity = UserGroupEntity.builder()
-                .id((long) 1)
+                .id(1)
                 .name("testGroup")
                 .build();
 

@@ -1,0 +1,33 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:latest
+    network_mode: bridge
+    container_name: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=gchat
+    restart: unless-stopped
+  # APP*****************************************
+  gchat:
+    image: karangoel59/gchat:latest
+    network_mode: bridge
+    container_name: gchat
+    expose:
+      - 4000
+    ports:
+      - 4000:4000
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    links:
+      - postgres
+volumes:
+  postgres-data:

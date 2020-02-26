@@ -30,16 +30,48 @@ def getCurrentBuildFailedTests() {
     return failedTests
 }
 
+def getBuildNumber(job) {
+    if (Jenkins.instance.getItem(job) != null && Jenkins.instance.getItem(job).lastSuccessfulBuild != null) {
+         return Jenkins.instance.getItem(job).lastSuccessfulBuild.number.toString()
+    } else {
+        return "0"
+    }
+}
+
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.6.3-jdk-11'
-            args '-v /root/.m2:/root/.m2'
-        }
+
+    environment {
+        registry = "karangoel59/gchat"
+        registryCredential = 'dockerhub'
+        dockerImage = '' 
+    }
+
+    agent none
+
+    parameters {
+        string(defaultValue: getBuildNumber('gchat-web'), description: '', name: 'buildNumber')
     }
 
     stages {
+        stage('Pull') {
+            agent any
+            when {
+                expression { params.buildNumber != '0' }
+            }   
+            steps {
+                script {
+                    copyArtifacts filter: 'build.zip' , fingerprintArtifacts: true, projectName: 'gchat-web', selector: specific("${params.buildNumber}")
+                    unzip zipFile: 'build.zip', dir: './web/src/main/resources/static'
+                }
+            }
+        }
         stage('Build') {
+            agent {
+                docker {
+                    image 'maven:3.6.3-jdk-11'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
             steps {
                 script {
                     try {
@@ -54,6 +86,12 @@ pipeline {
             }
         }
         stage('Test') {
+            agent {
+                docker {
+                    image 'maven:3.6.3-jdk-11'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
             steps {
                 script {
                     try {
@@ -72,6 +110,43 @@ pipeline {
                     sendTelegram("build completed for Gchat")
                     sendTelegram("Result:" + getCurrentBuildFailedTests().join(","))
                     sendTelegram(env.BUILD_URL)
+                }
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                script {
+                    dockerImage = docker.build registry + ":latest"
+                }
+            }
+        }
+        stage('Push') {
+            steps {
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        stage('Clean') {
+            agent {
+                docker {
+                    image 'maven:3.6.3-jdk-11'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps {
+                script {
+                    sh 'mvn clean'
+                }
+            }
+        }
+        stage('Deploy') {
+            agent any
+            steps {
+                script {
+                sh "docker-compose up -d"
                 }
             }
         }
