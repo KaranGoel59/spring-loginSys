@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
+import static karangoel.codes.gchat.util.MessagePrefixes.GROUP_BROKER;
+
 @Component
 public class WebSocketEventListener {
 
@@ -36,7 +38,7 @@ public class WebSocketEventListener {
             chatMessage.setType(ChatMessage.MessageType.LEAVE);
             chatMessage.setSender(username);
 
-            messagingTemplate.convertAndSend("/topic/public", chatMessage);
+            messagingTemplate.convertAndSend(GROUP_BROKER + "/1", chatMessage);
         }
     }
 }
