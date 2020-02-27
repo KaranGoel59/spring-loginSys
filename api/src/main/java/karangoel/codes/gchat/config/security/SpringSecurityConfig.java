@@ -98,6 +98,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
                     .antMatchers(HttpMethod.POST, httpPostMap.toArray(new String[0])).permitAll()
+                    .antMatchers("/api/**").fullyAuthenticated()
                     .antMatchers(HttpMethod.GET, httpGetMap.toArray(new String[0])).permitAll()
 
                 .anyRequest()

@@ -84,6 +84,11 @@ pipeline {
                     }
                 }
             }
+            post {
+                always {
+                    sendTelegram("Build Done Api")
+                }
+            }
         }
         stage('Test') {
             agent {
