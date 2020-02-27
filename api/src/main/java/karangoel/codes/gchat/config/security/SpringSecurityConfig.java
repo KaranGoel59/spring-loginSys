@@ -36,6 +36,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private List<String> httpHeaders;
     private List<String> httpOrigins;
     private List<String> httpMethods;
+    private List<String> httpGetMap;
+    private List<String> httpPostMap;
     private List<String> webIgnore;
 
     // == bean setters ==
@@ -75,6 +77,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
+    public void setHttpGetMap(List<String> httpGetMap) { this.httpGetMap = httpGetMap; }
+
+    @Autowired
+    public void setHttpPostMap(List<String> httpPostMap) { this.httpPostMap = httpPostMap; }
+
+    @Autowired
     public void webIgnore(List<String> webIgnore) {
         this.webIgnore = webIgnore;
     }
@@ -89,8 +97,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable()
 
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, SIGN_UP_URL, WEB_SOCKET_URL).permitAll()
-                    .antMatchers(HttpMethod.GET, WEB_SOCKET_URL).permitAll()
+                    .antMatchers(HttpMethod.POST, httpPostMap.toArray(new String[0])).permitAll()
+                    .antMatchers(HttpMethod.GET, httpGetMap.toArray(new String[0])).permitAll()
 
                 .anyRequest()
                     .authenticated()

@@ -6,8 +6,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static karangoel.codes.gchat.util.Constants.SIGN_UP_URL;
+import static karangoel.codes.gchat.util.Constants.WEB_SOCKET_URL;
 
 @Slf4j
 @Configuration
@@ -26,6 +30,10 @@ public class ApiConfig {
 
     @Value("${web.ignore}")
     private String webIgnore;
+
+    @Value("${http.getMap}")
+    private String httpGetMap;
+
 
 
     // == bean methods ==
@@ -51,6 +59,23 @@ public class ApiConfig {
     public List<String> webIgnore() {
         log.info("web ignore = {}",webIgnore);
         return Arrays.asList(webIgnore.split(","));
+    }
+
+    @Bean
+    public List<String> httpGetMap() {
+        log.info("http get = {}", httpGetMap);
+        List<String> gets = new ArrayList<>(Arrays.asList(httpGetMap.split(",")));
+        gets.add(WEB_SOCKET_URL);
+        return gets;
+    }
+
+    @Bean
+    public List<String> httpPostMap() {
+        log.info("http posts = {}", "");
+        List<String> posts = new ArrayList<>();
+        posts.add(SIGN_UP_URL);
+        posts.add(WEB_SOCKET_URL);
+        return posts;
     }
 
 }
